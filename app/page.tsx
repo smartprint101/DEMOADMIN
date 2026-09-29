@@ -255,14 +255,26 @@ function MiniChart() {
   </div>;
 }
 
+function OwnerGuide({ go, openCategory }: { go: (section: Section) => void; openCategory: () => void }) {
+  const actions = [
+    { number: '১', title: 'ক্যাটাগরি বানান', description: 'আপনার পণ্য কোন গ্রুপে থাকবে ঠিক করুন', label: 'ক্যাটাগরি যোগ', icon: Tags, onClick: openCategory, done: true },
+    { number: '২', title: 'পণ্য যোগ করুন', description: 'ছবি, মূল্য ও স্টক একবারে দিন', label: 'পণ্য যোগ', icon: Package, onClick: () => go('products'), done: true },
+    { number: '৩', title: 'Pixel কানেক্ট করুন', description: 'বিজ্ঞাপন থেকে অর্ডার বুঝুন', label: 'Pixel সেটআপ', icon: MousePointerClick, onClick: () => go('marketing'), done: false },
+    { number: '৪', title: 'অর্ডার চালান', description: 'অর্ডার খুলে কুরিয়ারে পাঠান', label: 'অর্ডার দেখুন', icon: ShoppingCart, onClick: () => go('orders'), done: false },
+  ];
+  return <Card className="owner-guide-card"><div className="owner-guide-head"><div><div className="card-kicker">FIRST DAY IN YOUR STORE</div><h2>শুরু করা খুব সহজ</h2><p>আপনার স্টোর চালাতে সবচেয়ে দরকারি ৪টি কাজ নিচে দেওয়া আছে। যেটা দরকার, সেটিতেই ক্লিক করুন।</p></div><div className="owner-progress"><strong>২ / ৪</strong><span>শুরু হয়েছে</span><div><i /></div></div></div><div className="owner-actions">{actions.map(action => <button key={action.title} onClick={action.onClick} className={cn('owner-action', action.done && 'completed')}><span className="owner-action-number">{action.number}</span><span className="owner-action-icon"><action.icon size={17} /></span><span className="owner-action-copy"><b>{action.title}</b><small>{action.description}</small></span><span className="owner-action-cta">{action.done ? <CheckCircle2 size={16} /> : <ArrowUpRight size={15} />}{action.label}</span></button>)}</div><div className="owner-note"><Sparkles size={14} /><span>নতুন হলে আগে ক্যাটাগরি → পণ্য → Pixel—এই ক্রমে সেটআপ করুন। কোনো জটিল coding জানা লাগবে না।</span></div></Card>;
+}
+
+
 function Dashboard({ go, openCategory }: { go: (section: Section) => void; openCategory: () => void }) {
   return <div className="space-y-6 fade">
     <SectionHeading
-      eyebrow="মঙ্গলবার, ২৪ জুন ২০২৫"
-      title="শুভ সকাল, রাইহান 👋"
-      description="আপনার স্টোরের আজকের গুরুত্বপূর্ণ আপডেট এক নজরে দেখুন।"
-      action={<div className="flex items-center gap-3"><button className="secondary-button"><Download size={15} /> রিপোর্ট</button><button onClick={openCategory} className="primary-button"><Plus size={17} /> ক্যাটাগরি যোগ করুন</button></div>}
+      eyebrow="আপনার স্টোর / TODAY"
+      title="আপনার স্টোর কন্ট্রোল রুম"
+      description="পণ্য যোগ করুন, অর্ডার দেখুন, Pixel কানেক্ট করুন—সবকিছু এক জায়গা থেকে সহজে করুন।"
+      action={<div className="flex items-center gap-3"><button onClick={() => go('analytics')} className="secondary-button"><Download size={15} /> রিপোর্ট দেখুন</button><button onClick={openCategory} className="primary-button"><Plus size={17} /> ক্যাটাগরি যোগ করুন</button></div>}
     />
+    <OwnerGuide go={go} openCategory={openCategory} />
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
       <StatCard icon={CircleDollarSign} label="মোট বিক্রি" value="৳ ৪৮,৫২০" change="১২.৮%" trend="up" tone="violet" />
       <StatCard icon={ShoppingCart} label="মোট অর্ডার" value="১২৮" change="৮.৪%" trend="up" tone="cyan" />
@@ -279,7 +291,7 @@ function Dashboard({ go, openCategory }: { go: (section: Section) => void; openC
       </Card>
       <Card className="relative overflow-hidden bg-[#182946] text-white">
         <div className="absolute -right-16 -top-20 h-48 w-48 rounded-full bg-[#7667ec33] blur-2xl" /><div className="absolute -bottom-16 -left-12 h-40 w-40 rounded-full bg-[#35c8bb26] blur-2xl" />
-        <div className="relative z-[1] flex h-full flex-col"><div className="flex items-center justify-between"><span className="card-kicker text-[#a9b8d4]">TODAY&apos;S CHECKLIST</span><span className="rounded-full bg-[#ffffff16] px-2.5 py-1 text-[10px] font-bold text-[#d7e2f5]">৩ / ৫ সম্পন্ন</span></div><h2 className="mt-4 text-[19px] font-bold tracking-[-.02em]">আজকের কাজগুলো গুছিয়ে নিন</h2><p className="mt-2 text-xs leading-5 text-[#afbdd2]">দৈনন্দিন অপারেশন আরও দ্রুত করতে গুরুত্বপূর্ণ কাজগুলো সম্পন্ন করুন।</p><div className="mt-6 space-y-3">{[['নতুন অর্ডার রিভিউ করুন', '২৪টি অর্ডার অপেক্ষমাণ', true], ['লো-স্টক পণ্য আপডেট করুন', '৮টি পণ্য কম স্টকে', false], ['নতুন ক্যাটাগরি সাজান', '৩টি ড্রাফট ক্যাটাগরি', false]].map(([label, meta, done]) => <button key={label as string} onClick={() => label === 'নতুন ক্যাটাগরি সাজান' && openCategory()} className="flex w-full items-center gap-3 rounded-xl border border-[#ffffff12] bg-[#ffffff0a] p-3 text-left transition hover:bg-[#ffffff16]"><span className={cn('grid h-6 w-6 shrink-0 place-items-center rounded-full border', done ? 'border-[#64d8bc] bg-[#64d8bc] text-[#182946]' : 'border-[#ffffff38] text-transparent')}><Check size={14} strokeWidth={3} /></span><span className="min-w-0 flex-1"><span className={cn('block text-xs font-semibold', done && 'text-[#a6b3c7] line-through')}>{label as string}</span><span className="mt-0.5 block text-[10px] text-[#93a4c0]">{meta as string}</span></span><ChevronRight size={14} className="text-[#8295b4]" /></button>)}</div><button onClick={() => go('inventory')} className="mt-auto pt-5 text-left text-xs font-bold text-[#8de2d0]">সব টাস্ক দেখুন <ArrowUpRight className="ml-1 inline" size={13} /></button></div>
+        <div className="relative z-[1] flex h-full flex-col"><div className="flex items-center justify-between"><span className="card-kicker text-[#a9b8d4]">TODAY&apos;S CHECKLIST</span><span className="rounded-full bg-[#ffffff16] px-2.5 py-1 text-[10px] font-bold text-[#d7e2f5]">১ / ৩ সম্পন্ন</span></div><h2 className="mt-4 text-[19px] font-bold tracking-[-.02em]">আজকের কাজগুলো গুছিয়ে নিন</h2><p className="mt-2 text-xs leading-5 text-[#afbdd2]">দৈনন্দিন অপারেশন আরও দ্রুত করতে গুরুত্বপূর্ণ কাজগুলো সম্পন্ন করুন।</p><div className="mt-6 space-y-3">{[['নতুন অর্ডার রিভিউ করুন', '২৪টি অর্ডার অপেক্ষমাণ', true], ['লো-স্টক পণ্য আপডেট করুন', '৮টি পণ্য কম স্টকে', false], ['নতুন ক্যাটাগরি সাজান', '৩টি ড্রাফট ক্যাটাগরি', false]].map(([label, meta, done]) => <button key={label as string} onClick={() => label === 'নতুন ক্যাটাগরি সাজান' ? openCategory() : label === 'নতুন অর্ডার রিভিউ করুন' ? go('orders') : go('inventory')} className="flex w-full items-center gap-3 rounded-xl border border-[#ffffff12] bg-[#ffffff0a] p-3 text-left transition hover:bg-[#ffffff16]"><span className={cn('grid h-6 w-6 shrink-0 place-items-center rounded-full border', done ? 'border-[#64d8bc] bg-[#64d8bc] text-[#182946]' : 'border-[#ffffff38] text-transparent')}><Check size={14} strokeWidth={3} /></span><span className="min-w-0 flex-1"><span className={cn('block text-xs font-semibold', done && 'text-[#a6b3c7] line-through')}>{label as string}</span><span className="mt-0.5 block text-[10px] text-[#93a4c0]">{meta as string}</span></span><ChevronRight size={14} className="text-[#8295b4]" /></button>)}</div><button onClick={() => go('inventory')} className="mt-auto pt-5 text-left text-xs font-bold text-[#8de2d0]">সব টাস্ক দেখুন <ArrowUpRight className="ml-1 inline" size={13} /></button></div>
       </Card>
     </div>
     <div className="grid gap-6 xl:grid-cols-[minmax(0,1.4fr)_minmax(330px,.8fr)]">
