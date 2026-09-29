@@ -1,0 +1,1 @@
+export const demoCourierHistory = [{ date:'১৫ সেপ্টেম্বর ২০২৬', courier:'Steadfast', tracking:'STF-982341', amount:'৳ ১,৮৫০', status:'Delivered' }, { date:'০৮ আগস্ট ২০২৬', courier:'Pathao Courier', tracking:'PTH-782341', amount:'৳ ২,৪৫০', status:'Delivered' }, { date:'২১ জুলাই ২০২৬', courier:'RedX', tracking:'RDX-551234', amount:'৳ ১,২৯০', status:'Returned' }];
