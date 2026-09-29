@@ -1,0 +1,1 @@
+export const demoProducts = [{ id:'p-1', name:'মিনিমাল লেদার ব্যাগ', category:'ফ্যাশন', price:1850, stock:48, sku:'SKU-101', variants:['Black / 40','Black / 42','White / 40'] }, { id:'p-2', name:'প্রিমিয়াম ঘড়ি', category:'ঘড়ি', price:2450, stock:12, sku:'SKU-102', variants:['Black','Silver'] }];
