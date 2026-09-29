@@ -1,0 +1,1 @@
+export const demoCoupons = [{ code:'WELCOME10', type:'Percentage', amount:'10%', minOrder:'৳ 1,000', status:'Active' }, { code:'SAVE500', type:'Fixed', amount:'৳ 500', minOrder:'৳ 3,000', status:'Active' }, { code:'EID25', type:'Percentage', amount:'25%', minOrder:'৳ 2,000', status:'Scheduled' }];

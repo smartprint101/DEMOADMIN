@@ -1,0 +1,1 @@
+export default function Loading(){return <main className="grid min-h-screen place-items-center bg-[#f5f7fb]"><div className="text-center"><div className="mx-auto h-10 w-10 animate-spin rounded-full border-4 border-[#dcecf0] border-t-[#35b8c5]"/><p className="mt-4 text-sm text-[#68758a]">Admin Panel লোড হচ্ছে...</p></div></main>}
